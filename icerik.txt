@@ -1,0 +1,9 @@
+app1
+	-variable-string-numbers-built-in-user-defined-default-flexible-function-quiz-lambda-function
+app2
+	-list-tuple-dictionary-if-else-video-quiz2-for-while-video-quiz3.p
+app3	
+	-class-constructor-variable-example
+
+app4
+	-syntax-error-exceptions
