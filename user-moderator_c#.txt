@@ -1,0 +1,237 @@
+/* Online C# Compiler and Editor */
+using System.IO;
+using System;
+
+public enum Gender 
+{
+  Male,
+  Female,
+  Other
+}
+public abstract class User
+{   
+    protected string userType;
+    protected string name;
+    protected Gender gender;
+    protected int age;
+    
+    public User() { }
+    
+    public abstract string GetUserName();
+    public abstract string GetUserType();
+    public abstract int GetAge();
+    public abstract Gender GetGender();
+}
+
+
+public class Admin : User 
+{
+    public Admin(string name, Gender gender, int age){
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.userType = "Admin";
+    }
+    
+     public override string GetUserName(){
+         return name;
+     }
+     
+     public override string GetUserType(){
+         return userType;
+     }
+     
+     public override int GetAge(){
+         return age;
+     }
+     
+     public override Gender GetGender(){
+         return gender;
+     }
+}
+
+
+public class Moderator : User 
+{
+    public Moderator(string name, Gender gender, int age){
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.userType = "Moderator";
+    }
+    
+     public override string GetUserName(){
+         return name;
+     }
+     
+     public override string GetUserType(){
+         return userType;
+     }
+     
+     public override int GetAge(){
+         return age;
+     }
+     
+     public override Gender GetGender(){
+         return gender;
+     }
+}
+
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Type baseType = typeof(User);
+    if (!baseType.IsAbstract)
+        throw new Exception($"{baseType.Name} type should be abstract");
+    
+    string values = Console.ReadLine();
+    string[] valuesArr = values.Split(' ');         
+    var type = (Gender)Enum.Parse(typeof(Gender), valuesArr[1]); 
+    User admin = new Admin(valuesArr[0], type, int.Parse(valuesArr[2]));
+    
+    
+    values = Console.ReadLine();
+    valuesArr = values.Split(' ');             
+    type = (Gender)Enum.Parse(typeof(Gender), valuesArr[1]);           
+    User moderator = new Moderator(valuesArr[0], type, int.Parse(valuesArr[2])); 
+    
+
+    var name = admin.GetUserName();
+    Console.WriteLine($"Type of user {name} is {admin.GetUserType()}");
+    Console.WriteLine($"Age of user {name} is {admin.GetAge()}");
+    Console.WriteLine($"Gender of user {name} is {admin.GetGender()}");
+    
+    name = moderator.GetUserName();
+    Console.WriteLine($"Type of user {name} is {moderator.GetUserType()}");
+    Console.WriteLine($"Age of user {name} is {moderator.GetAge()}");
+    Console.WriteLine($"Gender of user {name} is {moderator.GetGender()}");     
+  }
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+ALEX
+
+
+
+/* Online C# Compiler and Editor */
+using System.IO;
+using System;
+using System.Collections.Generic;
+class Result
+{
+    public static List<int> findMaximumValue(int[] prices, int pos, int money)
+    {
+        List<int> res = new List<int>();
+        int total = 0;
+        int maxProduct = 0;
+        int p;
+        
+        for(int i = pos-1; i < prices.Length; i++)
+        {
+            p = prices[i];
+            if (total+p<money){
+                total += p;
+                res.Add(p);
+                maxProduct++;
+            }
+            else
+                break;
+        }
+        Console.WriteLine("Tutar:"+total);
+        Console.WriteLine("Ürün sayısı:"+maxProduct);
+        return res;
+    }
+
+}
+
+class Program
+{
+    static void Main()
+    {
+        int[] a = { 1, 2, 3, 4, 5};
+        
+        List<int> result = Result.findMaximumValue(a, 2, 12);
+        
+        Console.Write("Ürünler:");
+        foreach(int r in result)
+            Console.Write(r + " ");
+    }
+}
+
+
+___________________________________________________________________________________________________________________________________________
+bitPattern
+
+
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
+
+class Result
+{
+    public static List<string> bitPattern(List<int> num)
+    {
+        
+        string before = null;
+        string after = null;
+        int a = 0;
+        int count = num.Count;
+        int control = 0;
+        
+        List<string> result = new List<string>();
+        List<int> numReverse = new List<int>(num);
+        numReverse.Reverse();
+        
+        int index = 0;
+        foreach(int val in num){
+            a = num.IndexOf(val);
+            if(a < index)
+                before += "1";
+            else before += "0";
+            a = numReverse.IndexOf(val);
+
+            control = count-a-1;
+            if (count - a -1 > index)
+                after += "1";
+            else after += "0";
+            index++;
+        }
+        
+        result.Add(before);
+        result.Add(after);
+        return result;
+    }
+
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+
+        List<int> num = new List<int>();
+        num.Add(1);
+        num.Add(3);
+        num.Add(2);
+        num.Add(3);
+        num.Add(4);
+        num.Add(1);
+        List<string> result = Result.bitPattern(num);
+        foreach(string val in result){
+             Console.WriteLine(val);
+        }
+    }
+}
